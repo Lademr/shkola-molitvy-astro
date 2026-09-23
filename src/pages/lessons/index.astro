@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const lessons = (await getCollection('lessons')).sort((a, b) => a.slug.localeCompare(b.slug));
+
+const parseSlug = (slug: string): { id: string; name: string } => {
+  const match = slug.match(/^(\d+)-(.+)$/);
+  return match ? { id: match[1], name: match[2] } : { id: slug, name: slug };
+};
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Уроки молитвенной жизни',
+    url: 'https://shkola-molity.ru/lessons',
+    inLanguage: 'ru',
+  },
+];
+---
+
+<BaseLayout
+  title="Уроки молитвенной жизни — Школа Молитвы"
+  description="Интерактивные уроки молитвенной жизни: водительство Духом, интуиция духа, отцовство Бога."
+  canonical="https://shkola-molity.ru/lessons"
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">Уроки молитвенной жизни</h1>
+    <p class="mt-3 max-w-2xl text-brand-700 dark:text-brand-300">Последовательный курс: от основ слушания Бога до продвинутых практик.</p>
+
+    {lessons.length === 0 ? (
+      <p class="mt-12 rounded-lg border border-dashed border-brand-300 p-8 text-center dark:border-brand-700">Скоро появятся уроки</p>
+    ) : (
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {lessons.map((lesson) => {
+          const { id, name } = parseSlug(lesson.slug);
+          return (
+            <a href={`/lessons/${id}/${name}`} class="group flex flex-col rounded-xl border border-brand-200 bg-white/80 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-brand-800 dark:bg-brand-900/60">
+              <span class="inline-flex w-fit rounded-full bg-accent-100 px-3 py-1 text-xs font-medium text-accent-900 dark:bg-accent-900/60 dark:text-accent-100">{lesson.data.level}</span>
+              <h2 class="mt-3 font-serif text-xl font-semibold text-brand-950 group-hover:text-accent-700 dark:text-brand-50">{lesson.data.title}</h2>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-brand-700 dark:text-brand-300">{lesson.data.description}</p>
+              <p class="mt-4 text-xs text-brand-500 dark:text-brand-400">⏱ {lesson.data.duration} · ✍ {lesson.data.author}</p>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </main>
+  <Footer />
+</BaseLayout>
