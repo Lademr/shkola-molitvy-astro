@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'О проекте — Школа Молитвы',
+    url: 'https://shkola-molity.ru/about',
+    inLanguage: 'ru',
+  },
+];
+---
+
+<BaseLayout
+  title="О проекте — Школа Молитвы"
+  description="Школа Молитвы — бесплатный интерактивный курс для христиан о молитвенной жизни."
+  canonical="https://shkola-molity.ru/about"
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">О проекте</h1>
+
+    <div class="mt-8 space-y-6 text-brand-700 dark:text-brand-300">
+      <p>
+        «Школа Молитвы» — бесплатный интерактивный онлайн-курс для христиан, желающих углубить
+        свои отношения с Богом через молитву и водительство Святым Духом.
+      </p>
+
+      <h2 class="font-serif text-2xl font-semibold text-brand-950 dark:text-brand-50">Для кого этот сайт</h2>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>Для тех, кто только начинает молитвенную жизнь.</li>
+        <li>Для тех, кто хочет углубить общение с Богом.</li>
+        <li>Для тех, кто ищет библейское основание для молитвы.</li>
+        <li>Для тех, кто хочет научиться слышать голос Духа.</li>
+      </ul>
+
+      <h2 class="font-serif text-2xl font-semibold text-brand-950 dark:text-brand-50">Наши цели</h2>
+      <ol class="list-decimal space-y-2 pl-6">
+        <li>Помочь верующим развивать живую молитвенную жизнь.</li>
+        <li>Дать практические инструменты для ежедневного общения с Богом.</li>
+        <li>Научить основам водительства Святым Духом.</li>
+        <li>Укрепить веру через изучение Писания и размышление.</li>
+      </ol>
+
+      <blockquote class="border-l-4 border-accent-400 pl-4 italic">
+        <p>«Приблизьтесь к Богу, и приблизится к вам»</p>
+        <cite class="mt-1 block not-italic text-sm">— Иакова 4:8</cite>
+      </blockquote>
+
+      <div class="flex flex-wrap gap-4 pt-4">
+        <a href="/lessons" class="rounded-lg bg-accent-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-accent-600">
+          Смотреть уроки
+        </a>
+        <a href="/" class="rounded-lg border border-brand-300 px-6 py-3 font-semibold text-brand-800 transition-colors hover:bg-brand-100 dark:border-brand-700 dark:text-brand-200">
+          На главную
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
