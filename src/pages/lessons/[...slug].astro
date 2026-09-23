@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons');
+  return lessons.map((lesson) => {
+    const match = lesson.slug.match(/^(\d+)-(.+)$/);
+    const id = match ? match[1] : lesson.slug;
+    const name = match ? match[2] : lesson.slug;
+    return {
+      params: { slug: `${id}/${name}` },
+      props: { lesson, id, name },
+    };
+  });
+}
+
+const { lesson, id, name } = Astro.props;
+const { Content } = await lesson.render();
+
+const canonical = `https://shkola-molity.ru/lessons/${id}/${name}`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: lesson.data.title,
+    description: lesson.data.description,
+    provider: { '@type': 'Organization', name: 'Школа Молитвы', url: 'https://shkola-molity.ru' },
+    url: canonical,
+    inLanguage: 'ru',
+  },
+];
+---
+
+<BaseLayout
+  title={`${lesson.data.title} — Школа Молитвы`}
+  description={lesson.data.description}
+  canonical={canonical}
+  type="article"
+  jsonLd={jsonLd}
+  publishedTime={lesson.data.datePublished}
+  modifiedTime={lesson.data.dateModified}
+  author={lesson.data.author}
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <nav class="mb-8 text-sm text-brand-600 dark:text-brand-400">
+      <a href="/lessons" class="hover:underline">← Все уроки</a>
+    </nav>
+    <article class="prose prose-lg max-w-none dark:prose-invert">
+      <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">{lesson.data.title}</h1>
+      <p class="text-sm text-brand-600 dark:text-brand-400">{lesson.data.level} · {lesson.data.duration} · {lesson.data.author}</p>
+      <Content />
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
