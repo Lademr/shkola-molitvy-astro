@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://shkola-molity.ru',
+  site: 'https://https://shkola-molitvy.ru',
   output: 'static',
   base: '/',
   build: {
