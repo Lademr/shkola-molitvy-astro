@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Молитвы — Школа Молитвы',
+    url: 'https://shkola-molity.ru/prayers',
+    inLanguage: 'ru',
+  },
+];
+---
+
+<BaseLayout
+  title="Молитвы — Школа Молитвы"
+  description="Коллекция молитв на разные случаи жизни."
+  canonical="https://shkola-molity.ru/prayers"
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">Молитвы</h1>
+    <p class="mt-3 text-brand-700 dark:text-brand-300">Коллекция молитв на разные случаи жизни.</p>
+    <p class="mt-8 rounded-lg border border-dashed border-brand-300 p-8 text-center dark:border-brand-700">Коллекция молитв скоро появится.</p>
+  </main>
+  <Footer />
+</BaseLayout>
