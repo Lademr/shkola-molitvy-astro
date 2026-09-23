@@ -1,0 +1,13 @@
+{
+  "name": "Школа Молитвы",
+  "short_name": "Школа Молитвы",
+  "description": "Интерактивный обучающий сайт для христиан",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f59e0b",
+  "lang": "ru",
+  "icons": [
+    { "src": "/logo-simple.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
