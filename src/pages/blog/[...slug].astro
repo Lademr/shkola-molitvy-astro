@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const canonical = `https://shkola-molity.ru/blog/${post.slug}`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.data.title,
+    description: post.data.description,
+    author: { '@type': 'Person', name: post.data.author },
+    datePublished: post.data.datePublished,
+    dateModified: post.data.dateModified,
+    url: canonical,
+    inLanguage: 'ru',
+  },
+];
+---
+
+<BaseLayout
+  title={`${post.data.title} — Школа Молитвы`}
+  description={post.data.description}
+  canonical={canonical}
+  type="article"
+  jsonLd={jsonLd}
+  publishedTime={post.data.datePublished}
+  modifiedTime={post.data.dateModified}
+  author={post.data.author}
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <nav class="mb-8 text-sm text-brand-600 dark:text-brand-400">
+      <a href="/blog" class="hover:underline">← Все статьи</a>
+    </nav>
+    <article class="prose prose-lg max-w-none dark:prose-invert">
+      <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">{post.data.title}</h1>
+      <p class="text-sm text-brand-600 dark:text-brand-400">{post.data.author} · {post.data.datePublished}</p>
+      <Content />
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
