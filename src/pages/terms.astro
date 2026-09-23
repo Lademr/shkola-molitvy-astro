@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Условия использования — Школа Молитвы"
+  description="Условия использования сайта Школа Молитвы."
+  canonical="https://shkola-molity.ru/terms"
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">Условия использования</h1>
+    <div class="mt-8 space-y-4 text-brand-700 dark:text-brand-300">
+      <p>Все материалы сайта «Школа Молитвы» доступны для личного изучения.</p>
+      <p>Вы можете делиться ссылками на материалы с другими, указывая источник.</p>
+      <p>Запрещается продавать материалы сайта или использовать их в коммерческих целях без разрешения.</p>
+      <p>Мы оставляем за собой право обновлять материалы и условия использования.</p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
