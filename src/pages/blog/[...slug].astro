@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 
-const canonical = `https://shkola-molity.ru/blog/${post.slug}`;
+const canonical = `https://shkola-molitvy.ru/blog/${post.slug}`;
 
 const jsonLd = [
   {
