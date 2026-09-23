@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { quizzes } from '../data/quizzes';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Тесты — Школа Молитвы',
+    url: 'https://shkola-molity.ru/quiz',
+    inLanguage: 'ru',
+  },
+];
+---
+
+<BaseLayout
+  title="Тесты — Школа Молитвы"
+  description="Проверьте знания по урокам молитвенной жизни. Интерактивные тесты с пояснениями."
+  canonical="https://shkola-molity.ru/quiz"
+  jsonLd={jsonLd}
+>
+  <Header />
+  <main class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">Тесты</h1>
+    <p class="mt-3 text-brand-700 dark:text-brand-300">Проверьте своё понимание материала после изучения уроков.</p>
+
+    <div id="quiz-list" class="mt-8 space-y-4">
+      {quizzes.map((quiz) => (
+        <div class="rounded-lg border border-brand-200 bg-white p-6 shadow-sm dark:border-brand-800 dark:bg-brand-900">
+          <h2 class="text-xl font-semibold text-brand-950 dark:text-brand-50">{quiz.lessonTitle}</h2>
+          <p class="mt-1 text-sm text-brand-600 dark:text-brand-400">Вопросов: {quiz.questions.length}</p>
+          <button data-lesson-id={quiz.lessonId} class="start-quiz-btn mt-4 rounded-md bg-accent-500 px-4 py-2 text-white transition-colors hover:bg-accent-600">
+            Начать тест
+          </button>
+        </div>
+      ))}
+    </div>
+
+    <div id="quiz-container" class="mt-8 hidden"></div>
+  </main>
+
+  <script type="application/json" id="quizzes-data" set:html={JSON.stringify(quizzes)}></script>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const quizzesData = JSON.parse(document.getElementById('quizzes-data')!.textContent!);
+  const listEl = document.getElementById('quiz-list')!;
+  const containerEl = document.getElementById('quiz-container')!;
+  let currentQuiz: any = null;
+  let answers: number[] = [];
+
+  function startQuiz(lessonId: string) {
+    currentQuiz = quizzesData.find((q: any) => q.lessonId === lessonId);
+    if (!currentQuiz) return;
+    answers = new Array(currentQuiz.questions.length).fill(-1);
+    listEl.classList.add('hidden');
+    containerEl.classList.remove('hidden');
+    renderQuestions();
+  }
+
+  function renderQuestions() {
+    if (!currentQuiz) return;
+    let html = `<h2 class="text-2xl font-bold mb-6">${currentQuiz.lessonTitle}</h2>`;
+    currentQuiz.questions.forEach((q: any, qIdx: number) => {
+      html += `<div class="mb-8 rounded border border-brand-200 p-4 dark:border-brand-700">`;
+      html += `<p class="font-medium mb-3">${qIdx + 1}. ${q.question}</p>`;
+      html += `<div class="space-y-2">`;
+      q.options.forEach((opt: string, oIdx: number) => {
+        html += `<label class="flex cursor-pointer items-center gap-2"><input type="radio" name="q${qIdx}" value="${oIdx}" class="accent-accent-600"><span>${opt}</span></label>`;
+      });
+      html += `</div></div>`;
+    });
+    html += `<div class="mt-8 flex justify-between"><button id="back-to-list" class="text-brand-600 hover:underline">← К списку тестов</button><button id="submit-quiz" class="rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700">Завершить</button></div>`;
+    containerEl.innerHTML = html;
+
+    containerEl.querySelectorAll('input[type="radio"]').forEach((radio) => {
+      radio.addEventListener('change', (e: any) => {
+        const name = e.target.name.replace('q', '');
+        answers[parseInt(name)] = parseInt(e.target.value);
+      });
+    });
+
+    document.getElementById('back-to-list')?.addEventListener('click', () => {
+      containerEl.classList.add('hidden');
+      listEl.classList.remove('hidden');
+    });
+    document.getElementById('submit-quiz')?.addEventListener('click', showResults);
+  }
+
+  function showResults() {
+    if (!currentQuiz) return;
+    let score = 0;
+    let resultsHtml = `<h2 class="text-2xl font-bold mb-4">Результаты</h2>`;
+    currentQuiz.questions.forEach((q: any, idx: number) => {
+      const userAns = answers[idx];
+      const isCorrect = userAns === q.correctAnswer;
+      if (isCorrect) score++;
+      resultsHtml += `<div class="mb-4 rounded border-l-4 p-4 ${isCorrect ? 'border-green-500 bg-green-50 dark:bg-green-900/20' : 'border-red-500 bg-red-50 dark:bg-red-900/20'}">`;
+      resultsHtml += `<p class="font-medium">${idx + 1}. ${q.question}</p>`;
+      resultsHtml += `<p class="mt-1 text-sm">Ваш ответ: <span class="${isCorrect ? 'text-green-700' : 'text-red-700'} font-bold">${userAns !== -1 ? q.options[userAns] : 'Не отвечено'}</span></p>`;
+      if (!isCorrect) resultsHtml += `<p class="mt-1 text-sm">Правильный: <span class="font-bold text-green-700">${q.options[q.correctAnswer]}</span></p>`;
+      resultsHtml += `<p class="mt-2 text-xs italic opacity-80">${q.explanation}</p></div>`;
+    });
+    resultsHtml = `<div class="mb-6 text-center"><p class="text-3xl font-bold">${score} из ${currentQuiz.questions.length}</p></div>` + resultsHtml;
+    resultsHtml += `<button id="back-to-list-res" class="mt-4 w-full rounded border border-brand-300 py-2 hover:bg-brand-100">К списку тестов</button>`;
+    containerEl.innerHTML = resultsHtml;
+
+    const results = JSON.parse(localStorage.getItem('shkola_quiz_results') || '{}');
+    results[currentQuiz.lessonId] = { score, total: currentQuiz.questions.length, date: new Date().toISOString() };
+    localStorage.setItem('shkola_quiz_results', JSON.stringify(results));
+
+    document.getElementById('back-to-list-res')?.addEventListener('click', () => {
+      containerEl.classList.add('hidden');
+      listEl.classList.remove('hidden');
+    });
+  }
+
+  document.querySelectorAll('.start-quiz-btn').forEach((btn) => {
+    btn.addEventListener('click', (e: any) => startQuiz(e.currentTarget.dataset.lessonId));
+  });
+</script>
