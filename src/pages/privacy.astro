@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Политика конфиденциальности — Школа Молитвы"
+  description="Политика конфиденциальности сайта Школа Молитвы."
+  canonical="https://shkola-molity.ru/privacy"
+>
+  <Header />
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">Политика конфиденциальности</h1>
+    <div class="mt-8 space-y-4 text-brand-700 dark:text-brand-300">
+      <p>Мы уважаем вашу конфиденциальность. Сайт «Школа Молитвы» не собирает персональные данные пользователей на сервере.</p>
+      <p>Все данные молитвенного дневника хранятся локально в вашем браузере (localStorage) и не передаются третьим лицам.</p>
+      <p>Мы не используем файлы cookie для отслеживания. Аналитика может вестись в анонимном режиме.</p>
+      <p>Если у вас возникли вопросы — свяжитесь с нами через раздел «Обратная связь».</p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
