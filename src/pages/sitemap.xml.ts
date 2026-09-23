@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 export const GET: APIRoute = async () => {
   const lessons = await getCollection('lessons');
   const posts = await getCollection('blog');
-  const baseUrl = 'https://shkola-molity.ru';
+  const baseUrl = 'https://shkola-molitvy.ru';
 
   const staticPages = [
     { url: '/', priority: '1.0', changefreq: 'weekly' },
