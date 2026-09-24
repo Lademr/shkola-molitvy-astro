@@ -2,7 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import LessonQuiz from '../../components/LessonQuiz.astro';
 import { getCollection } from 'astro:content';
+import { getQuizByLessonId } from '../../data/quizzes';
 
 export async function getStaticPaths() {
   const lessons = await getCollection('lessons');
@@ -51,11 +53,18 @@ const jsonLd = [
     <nav class="mb-8 text-sm text-brand-600 dark:text-brand-400">
       <a href="/lessons" class="hover:underline">← Все уроки</a>
     </nav>
-    <article class="prose prose-lg max-w-none dark:prose-invert">
+
+    <article class="lesson-content">
       <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">{lesson.data.title}</h1>
       <p class="text-sm text-brand-600 dark:text-brand-400">{lesson.data.level} · {lesson.data.duration} · {lesson.data.author}</p>
       <Content />
     </article>
+
+    {quiz && <LessonQuiz lessonId={id} quiz={quiz} />}
+
+    <div class="mt-8">
+      <a href="/lessons" class="text-brand-600 hover:underline dark:text-brand-400">← Все уроки</a>
+    </div>
   </main>
   <Footer />
 </BaseLayout>
