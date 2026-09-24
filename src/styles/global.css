@@ -17,37 +17,67 @@ html {
 body {
   @apply antialiased;
 }
-/* Стили для контента урока (вместо prose) */
+
+/* ============================================
+   Стили для контента урока (вместо prose)
+   ============================================ */
+
 .lesson-content h1 {
   @apply font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50 mb-3;
 }
+
 .lesson-content h2 {
   @apply font-serif text-2xl font-bold text-brand-950 mt-10 mb-4 pb-2 border-b border-brand-200 dark:border-brand-800 dark:text-brand-50;
 }
+
 .lesson-content h3 {
   @apply font-serif text-xl font-semibold text-brand-900 mt-6 mb-3 dark:text-brand-100;
 }
+
 .lesson-content p {
   @apply text-brand-800 leading-relaxed my-4 dark:text-brand-200;
 }
+
 .lesson-content blockquote {
   @apply border-l-4 border-accent-400 pl-4 italic text-brand-700 my-4 dark:text-brand-300;
 }
+
 .lesson-content blockquote p {
   @apply my-2;
 }
+
 .lesson-content ol {
   @apply list-decimal pl-6 my-4 space-y-2 text-brand-800 dark:text-brand-200;
 }
+
 .lesson-content ul {
   @apply list-disc pl-6 my-4 space-y-2 text-brand-800 dark:text-brand-200;
 }
+
 .lesson-content a {
   @apply text-accent-600 underline hover:text-accent-700 dark:text-accent-400;
 }
+
 .lesson-content strong {
   @apply font-bold text-brand-950 dark:text-brand-50;
 }
+
 .lesson-content em {
   @apply italic;
+}
+
+/* ============================================
+   Плавное раскрытие сворачивающихся блоков
+   ============================================ */
+
+.lesson-content details {
+  @apply transition-all;
+}
+
+.lesson-content details[open] > summary {
+  @apply rounded-b-none;
+}
+
+.lesson-content summary {
+  @apply transition-colors;
 }
