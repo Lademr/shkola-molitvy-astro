@@ -19,6 +19,7 @@ export async function getStaticPaths() {
 
 const { lesson, id, name } = Astro.props;
 const { Content } = await lesson.render();
+const quiz = getQuizByLessonId(id);
 
 const canonical = `https://shkola-molitvy.ru/lessons/${id}/${name}`;
 
