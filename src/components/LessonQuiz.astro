@@ -1,0 +1,198 @@
+---
+interface Props {
+  lessonId: string;
+  quiz: {
+    lessonId: string;
+    lessonTitle: string;
+    questions: Array<{
+      question: string;
+      options: string[];
+      correctAnswer: number;
+      explanation: string;
+    }>;
+  };
+}
+const { lessonId, quiz } = Astro.props;
+const uid = `lesson-quiz-${lessonId}`;
+---
+
+<section
+  class="mt-12 rounded-2xl border-2 border-accent-300 bg-accent-50/40 p-6 dark:border-accent-800 dark:bg-accent-950/20"
+  id={uid}
+>
+  <h2 class="mb-2 font-serif text-2xl font-bold text-brand-950 dark:text-brand-50">
+    🧪 Проверьте себя
+  </h2>
+  <p class="mb-6 text-sm text-brand-600 dark:text-brand-400">
+    Выберите вариант ответа и нажмите «Проверить». Правильный ответ откроется только после проверки.
+  </p>
+
+  {quiz.questions.map((q, idx) => (
+    <div
+      class="quiz-question mb-5 rounded-xl border border-brand-200 bg-white/80 p-5 dark:border-brand-800 dark:bg-brand-900/60"
+      data-uid={uid}
+      data-q-index={idx}
+    >
+      <p class="mb-4 font-semibold text-brand-900 dark:text-brand-100">
+        {idx + 1}. {q.question}
+      </p>
+
+      <div class="space-y-2">
+        {q.options.map((opt, oIdx) => (
+          <label class="quiz-option flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-brand-50 dark:hover:bg-brand-800/50">
+            <input
+              type="radio"
+              name={`${uid}-q-${idx}`}
+              value={oIdx}
+              data-uid={uid}
+              data-q-index={idx}
+              class="h-4 w-4 accent-accent-500"
+            />
+            <span class="text-brand-800 dark:text-brand-200">{opt}</span>
+          </label>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        class="quiz-check-btn mt-4 rounded-lg bg-accent-500 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-600 disabled:cursor-not-allowed disabled:opacity-40"
+        data-uid={uid}
+        data-q-index={idx}
+        disabled
+      >
+        Проверить ответ
+      </button>
+
+      <div
+        class="quiz-result mt-4 hidden"
+        data-uid={uid}
+        data-q-index={idx}
+      ></div>
+    </div>
+  ))}
+
+  <div
+    class="quiz-summary mt-6 hidden rounded-xl bg-white/80 p-5 text-center dark:bg-brand-900/60"
+    data-uid={uid}
+  >
+    <p class="quiz-score text-3xl font-bold text-brand-950 dark:text-brand-50"></p>
+    <p class="quiz-score-text mt-1 text-brand-600 dark:text-brand-400"></p>
+  </div>
+</section>
+
+<script
+  type="application/json"
+  id={`${uid}-data`}
+  set:html={JSON.stringify(quiz)}
+></script>
+
+<script>
+  document.querySelectorAll('.lesson-quiz, section[id^="lesson-quiz-"]').forEach((container: any) => {
+    const uid = container.id;
+    const dataEl = document.getElementById(`${uid}-data`);
+    if (!dataEl) return;
+
+    const quiz = JSON.parse(dataEl.textContent || '{}');
+    const answered: Record<number, boolean> = {};
+
+    // Разблокировать кнопку «Проверить» при выборе варианта
+    container
+      .querySelectorAll(`input[data-uid="${uid}"]`)
+      .forEach((radio: any) => {
+        radio.addEventListener('change', () => {
+          const idx = radio.dataset.qIndex;
+          const btn = container.querySelector(
+            `.quiz-check-btn[data-q-index="${idx}"]`
+          ) as HTMLButtonElement;
+          if (btn) btn.disabled = false;
+        });
+      });
+
+    // Обработка кнопки «Проверить ответ»
+    container.querySelectorAll('.quiz-check-btn').forEach((btn: any) => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.qIndex);
+        const q = quiz.questions[idx];
+        const selected = container.querySelector(
+          `input[name="${uid}-q-${idx}"]:checked`
+        ) as HTMLInputElement;
+        if (!selected) return;
+
+        const userAnswer = parseInt(selected.value);
+        const isCorrect = userAnswer === q.correctAnswer;
+
+        // Подсветить правильный/неправильный вариант
+        container
+          .querySelectorAll(`input[name="${uid}-q-${idx}"]`)
+          .forEach((radio: any) => {
+            radio.disabled = true;
+            const label = radio.closest('label') as HTMLElement;
+            const val = parseInt(radio.value);
+            if (val === q.correctAnswer) {
+              label.classList.add(
+                'bg-green-50',
+                'dark:bg-green-950/30',
+                'ring-1',
+                'ring-green-400'
+              );
+            } else if (val === userAnswer && !isCorrect) {
+              label.classList.add(
+                'bg-red-50',
+                'dark:bg-red-950/30',
+                'ring-1',
+                'ring-red-400'
+              );
+            }
+          });
+
+        // Показать результат
+        const result = container.querySelector(
+          `.quiz-result[data-q-index="${idx}"]`
+        ) as HTMLElement;
+        const correctText = `${q.correctAnswer + 1}. ${q.options[q.correctAnswer]}`;
+
+        result.innerHTML = isCorrect
+          ? `<div class="rounded-lg border-l-4 border-green-500 bg-green-50/60 p-4 dark:bg-green-950/20">
+              <p class="font-semibold text-green-800 dark:text-green-300">✅ Верно!</p>
+              <p class="mt-1 text-sm text-brand-700 dark:text-brand-300">${q.explanation}</p>
+            </div>`
+          : `<div class="rounded-lg border-l-4 border-red-500 bg-red-50/60 p-4 dark:bg-red-950/20">
+              <p class="font-semibold text-red-800 dark:text-red-300">❌ Неверно. Правильный ответ: ${correctText}</p>
+              <p class="mt-1 text-sm text-brand-700 dark:text-brand-300">${q.explanation}</p>
+            </div>`;
+
+        result.classList.remove('hidden');
+        btn.disabled = true;
+        btn.textContent = 'Проверено';
+        answered[idx] = isCorrect;
+
+        // Итог, когда всё пройдено
+        if (Object.keys(answered).length === quiz.questions.length) {
+          const correctCount = Object.values(answered).filter((v) => v).length;
+          const summary = container.querySelector('.quiz-summary') as HTMLElement;
+          const scoreEl = summary.querySelector('.quiz-score') as HTMLElement;
+          const scoreTextEl = summary.querySelector('.quiz-score-text') as HTMLElement;
+
+          scoreEl.textContent = `${correctCount} из ${quiz.questions.length}`;
+          scoreTextEl.textContent =
+            correctCount === quiz.questions.length
+              ? 'Отличный результат! 🎉'
+              : 'Продолжайте практиковаться 💪';
+
+          summary.classList.remove('hidden');
+
+          // Сохранить результат
+          const results = JSON.parse(
+            localStorage.getItem('shkola_quiz_results') || '{}'
+          );
+          results[quiz.lessonId] = {
+            score: correctCount,
+            total: quiz.questions.length,
+            date: new Date().toISOString(),
+          };
+          localStorage.setItem('shkola_quiz_results', JSON.stringify(results));
+        }
+      });
+    });
+  });
+</script>
