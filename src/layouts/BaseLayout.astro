@@ -100,8 +100,8 @@ const {
         document.querySelectorAll('.insight-term').forEach((el) => {
           el.addEventListener('click', () => {
             const id = el.getAttribute('data-insight');
-            const content = document.querySelector(`.insight-content[data-insight-id="${id}"]`);
-            if (content) openModal(content.innerHTML);
+            const template = document.querySelector(`template[data-insight-id="${id}"]`) as HTMLTemplateElement | null;
+            if (template) openModal(template.innerHTML);
           });
         });
 
