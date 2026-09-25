@@ -103,8 +103,19 @@ body {
   @apply border-accent-700 text-accent-900 dark:border-accent-200 dark:text-accent-100;
 }
 
-.insight-modal {
-  @apply fixed inset-0 z-[100] flex items-center justify-center p-4;
+/* Модальное окно — скрыто, пока не открыто */
+.insight-modal:not(.hidden) {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.insight-modal.hidden {
+  display: none !important;
 }
 
 .insight-modal-backdrop {
@@ -120,6 +131,7 @@ body {
   @apply absolute right-3 top-3 rounded-lg p-2 text-brand-500 transition-colors hover:bg-brand-100 hover:text-brand-800 dark:text-brand-400 dark:hover:bg-brand-800 dark:hover:text-brand-100;
 }
 
-.insight-content {
+/* Хранилище пояснений — надёжно скрыто */
+template[data-insight-id] {
   display: none;
 }
