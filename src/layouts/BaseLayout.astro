@@ -57,6 +57,20 @@ const {
 
   <body class="min-h-screen bg-gradient-to-b from-brand-50 via-white to-accent-50 font-sans text-brand-950 transition-colors dark:from-brand-950 dark:via-brand-900 dark:to-accent-950 dark:text-brand-100">
     <slot />
+
+    <!-- Модальное окно для интерактивных пояснений -->
+    <div id="insight-modal" class="insight-modal hidden">
+      <div class="insight-modal-backdrop" data-insight-close></div>
+      <div class="insight-modal-content">
+        <button class="insight-modal-close" data-insight-close aria-label="Закрыть">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <div id="insight-modal-body"></div>
+      </div>
+    </div>
+
     <script>
       function toggleTheme() {
         const root = document.documentElement;
@@ -64,6 +78,41 @@ const {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
       }
       (window as unknown as { toggleTheme: () => void }).toggleTheme = toggleTheme;
+
+      // ===== Интерактивные пояснения (всплывающие плашки) =====
+      (function () {
+        const modal = document.getElementById('insight-modal');
+        const body = document.getElementById('insight-modal-body');
+        if (!modal || !body) return;
+
+        function openModal(html: string) {
+          body!.innerHTML = html;
+          modal!.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+          modal!.classList.add('hidden');
+          body!.innerHTML = '';
+          document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.insight-term').forEach((el) => {
+          el.addEventListener('click', () => {
+            const id = el.getAttribute('data-insight');
+            const content = document.querySelector(`.insight-content[data-insight-id="${id}"]`);
+            if (content) openModal(content.innerHTML);
+          });
+        });
+
+        modal.querySelectorAll('[data-insight-close]').forEach((el) => {
+          el.addEventListener('click', closeModal);
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+        });
+      })();
     </script>
   </body>
 </html>
