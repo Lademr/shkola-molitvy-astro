@@ -40,29 +40,47 @@ const courseLd = {
 const rawContent = lesson.body || '';
 const faqItems: Array<{ '@type': 'Question'; name: string; acceptedAnswer: { '@type': 'Answer'; text: string } }> = [];
 
-// Регулярное выражение для поиска <script type="text/html" data-insight-id="...">...</script>
 const insightRegex = /<script\s+type="text\/html"\s+data-insight-id="([^"]+)"[^>]*>([\s\S]*?)<\/script>/g;
 let match: RegExpExecArray | null;
 
 while ((match = insightRegex.exec(rawContent)) !== null) {
-  const content = match[2];
+  let content = match[2];
+
+  // Убираем SVG и emoji-иконки из начала (первый блок с иконкой и заголовком)
+  content = content.replace(/<svg[^>]*>[\s\S]*?<\/svg>/g, '');
 
   // Извлекаем заголовок (h3 или h2)
   const headingMatch = content.match(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/);
   const question = headingMatch
-    ? headingMatch[1].replace(/<[^>]+>/g, '').trim()
+    ? headingMatch[1].replace(/<[^>]+>/g, '').replace(/[^\p{L}\p{N}\s«»"'’\-—:?!.,]/gu, '').trim()
     : 'Пояснение';
 
-  // Извлекаем текст (всё, кроме заголовка), удаляем HTML
+  // Убираем заголовок из тела
   let answer = content.replace(/<h[23][^>]*>[\s\S]*?<\/h[23]>/g, '');
-  answer = answer
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/g, '')
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/g, '');
-  // Заменяем блочные элементы на пробелы, чтобы не склеивалось
-  answer = answer.replace(/<\/(p|li|div|h[1-6]|br)>/g, '. ');
+
+  // Убираем emoji (не они нужны в тексте для поисковика)
+  answer = answer.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '');
+
+  // Заменяем блочные элементы на точку с пробелом
+  answer = answer.replace(/<\/(p|li|h[1-6])>/g, '. ');
+  answer = answer.replace(/<\/div>/g, ' ');
+  answer = answer.replace(/<br\s*\/?>/g, ' ');
+
+  // Убираем остальные HTML-теги
   answer = answer.replace(/<[^>]+>/g, '');
-  answer = answer.replace(/&nbsp;/g, ' ');
+
+  // Декодируем HTML-сущности
+  answer = answer.replace(/&nbsp;/g, ' ')
+    .replace(/&laquo;/g, '«').replace(/&raquo;/g, '»')
+    .replace(/&quot;/g, '"').replace(/&amp;/g, '&')
+    .replace(/&mdash;/g, '—').replace(/&ndash;/g, '–');
+
+  // Убираем множественные пробелы и точки
+  answer = answer.replace(/\s*\.\s*\.\s*/g, '. ');
   answer = answer.replace(/\s+/g, ' ').trim();
+
+  // Убираем ведущие точки и пробелы
+  answer = answer.replace(/^[\s.]+/, '');
 
   if (question && answer) {
     faqItems.push({
@@ -70,7 +88,7 @@ while ((match = insightRegex.exec(rawContent)) !== null) {
       name: question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: answer.slice(0, 500), // максимум 500 символов на ответ — оптимально для Google
+        text: answer.slice(0, 1500),
       },
     });
   }
