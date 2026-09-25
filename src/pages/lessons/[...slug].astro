@@ -25,17 +25,67 @@ const quiz = getQuizByLessonId(id);
 
 const canonical = `https://shkola-molitvy.ru/lessons/${id}/${name}`;
 
-const jsonLd = [
-  {
+// Основная разметка Course
+const courseLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: lesson.data.title,
+  description: lesson.data.description,
+  provider: { '@type': 'Organization', name: 'Школа Молитвы', url: 'https://shkola-molitvy.ru' },
+  url: canonical,
+  inLanguage: 'ru',
+};
+
+// Собираем FAQ из интерактивных пояснений в уроке
+const rawContent = lesson.body || '';
+const faqItems: Array<{ '@type': 'Question'; name: string; acceptedAnswer: { '@type': 'Answer'; text: string } }> = [];
+
+// Регулярное выражение для поиска <script type="text/html" data-insight-id="...">...</script>
+const insightRegex = /<script\s+type="text\/html"\s+data-insight-id="([^"]+)"[^>]*>([\s\S]*?)<\/script>/g;
+let match: RegExpExecArray | null;
+
+while ((match = insightRegex.exec(rawContent)) !== null) {
+  const content = match[2];
+
+  // Извлекаем заголовок (h3 или h2)
+  const headingMatch = content.match(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/);
+  const question = headingMatch
+    ? headingMatch[1].replace(/<[^>]+>/g, '').trim()
+    : 'Пояснение';
+
+  // Извлекаем текст (всё, кроме заголовка), удаляем HTML
+  let answer = content.replace(/<h[23][^>]*>[\s\S]*?<\/h[23]>/g, '');
+  answer = answer
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/g, '')
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/g, '');
+  // Заменяем блочные элементы на пробелы, чтобы не склеивалось
+  answer = answer.replace(/<\/(p|li|div|h[1-6]|br)>/g, '. ');
+  answer = answer.replace(/<[^>]+>/g, '');
+  answer = answer.replace(/&nbsp;/g, ' ');
+  answer = answer.replace(/\s+/g, ' ').trim();
+
+  if (question && answer) {
+    faqItems.push({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: answer.slice(0, 500), // максимум 500 символов на ответ — оптимально для Google
+      },
+    });
+  }
+}
+
+// Собираем итоговый JSON-LD массив
+const jsonLd: Record<string, unknown>[] = [courseLd];
+
+if (faqItems.length > 0) {
+  jsonLd.push({
     '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: lesson.data.title,
-    description: lesson.data.description,
-    provider: { '@type': 'Organization', name: 'Школа Молитвы', url: 'https://shkola-molitvy.ru' },
-    url: canonical,
-    inLanguage: 'ru',
-  },
-];
+    '@type': 'FAQPage',
+    mainEntity: faqItems,
+  });
+}
 ---
 
 <BaseLayout
@@ -53,7 +103,6 @@ const jsonLd = [
     <nav class="mb-8 text-sm text-brand-600 dark:text-brand-400">
       <a href="/lessons" class="hover:underline">← Все уроки</a>
     </nav>
-
     <article class="lesson-content">
       <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">{lesson.data.title}</h1>
       <p class="text-sm text-brand-600 dark:text-brand-400">{lesson.data.level} · {lesson.data.duration} · {lesson.data.author}</p>
