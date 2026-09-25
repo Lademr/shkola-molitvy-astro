@@ -52,8 +52,8 @@ while ((match = insightRegex.exec(rawContent)) !== null) {
   // Извлекаем заголовок (h3 или h2)
   const headingMatch = content.match(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/);
   const question = headingMatch
-    ? headingMatch[1].replace(/<[^>]+>/g, '').replace(/[^\p{L}\p{N}\s«»"'’\-—:?!.,]/gu, '').trim()
-    : 'Пояснение';
+  ? headingMatch[1].replace(/<[^>]+>/g, '').replace(/[^\p{L}\p{N}\s«»"'’\-—:?!.,\/]/gu, '').trim()
+  : 'Пояснение';
 
   // Убираем заголовок из тела
   let answer = content.replace(/<h[23][^>]*>[\s\S]*?<\/h[23]>/g, '');
