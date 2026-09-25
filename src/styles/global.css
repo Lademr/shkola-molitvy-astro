@@ -81,3 +81,45 @@ body {
 .lesson-content summary {
   @apply transition-colors;
 }
+
+/* ============================================
+   Интерактивные пояснения (всплывающие плашки)
+   ============================================ */
+
+.insight-term {
+  @apply cursor-pointer border-b-2 border-dotted border-accent-500 font-semibold text-accent-700 transition-colors dark:border-accent-400 dark:text-accent-300;
+  position: relative;
+}
+
+.insight-term::after {
+  content: '💡';
+  @apply ml-1 text-xs;
+  display: inline-block;
+  vertical-align: super;
+  line-height: 1;
+}
+
+.insight-term:hover {
+  @apply border-accent-700 text-accent-900 dark:border-accent-200 dark:text-accent-100;
+}
+
+.insight-modal {
+  @apply fixed inset-0 z-[100] flex items-center justify-center p-4;
+}
+
+.insight-modal-backdrop {
+  @apply absolute inset-0 bg-black/60 backdrop-blur-sm;
+}
+
+.insight-modal-content {
+  @apply relative z-10 w-full max-w-2xl overflow-y-auto rounded-2xl border border-brand-200 bg-white p-6 shadow-2xl dark:border-brand-700 dark:bg-brand-900 sm:p-8;
+  max-height: 85vh;
+}
+
+.insight-modal-close {
+  @apply absolute right-3 top-3 rounded-lg p-2 text-brand-500 transition-colors hover:bg-brand-100 hover:text-brand-800 dark:text-brand-400 dark:hover:bg-brand-800 dark:hover:text-brand-100;
+}
+
+.insight-content {
+  display: none;
+}
