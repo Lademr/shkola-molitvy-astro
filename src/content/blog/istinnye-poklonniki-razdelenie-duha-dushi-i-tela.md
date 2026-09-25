@@ -286,7 +286,7 @@ category: "учение"
 <p class="mt-3 text-brand-800 dark:text-brand-200">Этот урок — не просто чтение. Это <strong>путь к преображению вашей тайной комнаты</strong>. Пройдите его со всей серьёзностью — и вы увидите, как ваша молитвенная жизнь перейдёт на новый уровень.</p>
 
 <p class="mt-6 text-center">
-<a href="/lessons/2/istinnye-poklonniki" class="inline-block rounded-lg bg-accent-500 px-8 py-3.5 font-semibold text-white shadow-md ring-2 ring-accent-300 transition-all hover:bg-accent-600 hover:shadow-lg hover:ring-accent-400 dark:bg-accent-500 dark:ring-accent-400 dark:hover:bg-accent-400 dark:hover:ring-accent-300">
+<a href="/lessons/2/istinnye-poklonniki" class="inline-block rounded-lg bg-accent-500 px-8 py-4 text-lg font-bold !text-white shadow-md transition-all hover:bg-accent-600 hover:shadow-lg">
 → Перейти к Уроку 2
 </a>
 </p>
