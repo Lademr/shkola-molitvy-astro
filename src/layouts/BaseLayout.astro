@@ -58,7 +58,6 @@ const {
   <body class="min-h-screen bg-gradient-to-b from-brand-50 via-white to-accent-50 font-sans text-brand-950 transition-colors dark:from-brand-950 dark:via-brand-900 dark:to-accent-950 dark:text-brand-100">
     <slot />
 
-    <!-- Модальное окно для интерактивных пояснений -->
     <div id="insight-modal" class="insight-modal hidden">
       <div class="insight-modal-backdrop" data-insight-close></div>
       <div class="insight-modal-content">
@@ -79,7 +78,6 @@ const {
       }
       (window as unknown as { toggleTheme: () => void }).toggleTheme = toggleTheme;
 
-      // ===== Интерактивные пояснения (всплывающие плашки) =====
       (function () {
         const modal = document.getElementById('insight-modal');
         const body = document.getElementById('insight-modal-body');
