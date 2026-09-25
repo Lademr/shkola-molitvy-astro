@@ -202,3 +202,56 @@ author: "Плиев Владимир Бексултанович"
     </p>
   </div>
 </template>
+
+<template data-insight-id="pray-method">
+  <div class="mb-4 flex items-center gap-3">
+    <span class="text-3xl">🙏</span>
+    <h3 class="font-serif text-2xl font-bold text-accent-700 dark:text-accent-300">Модель P-R-A-Y</h3>
+  </div>
+
+  <p class="mb-4 text-brand-800 dark:text-brand-200">
+    <strong>P-R-A-Y</strong> — простая, но глубокая четырёхшаговая структура, которая помогает сбалансировать молитву и переключить фокус с суеты на присутствие Бога. Расчёт на <strong>15–20 минут</strong> ежедневной тайной комнаты.
+  </p>
+
+  <div class="space-y-4 mt-6">
+
+    <div class="rounded-lg border-l-4 border-amber-400 bg-amber-50/60 p-4 dark:bg-amber-950/30">
+      <p class="font-bold text-amber-800 dark:text-amber-300">1. P — Praise (Хвала и Поклонение) · 3–5 мин</p>
+      <p class="mt-2 text-sm text-brand-700 dark:text-brand-300"><strong>Цель:</strong> Настроить дух, взглянуть на Величие и Характер Отца, а не на свои проблемы.</p>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Как применить:</strong> Начните молитву не с просьб, а с прославления Бога за то, Кто Он есть (Его любовь, святость, верность, всемогущество), и благодарности за конкретные дела.</p>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Практика:</strong> Произнесите вслух 2–3 качества Бога или помолитесь словами Псалма (например, Пс. 102 или Пс. 144).</p>
+    </div>
+
+    <div class="rounded-lg border-l-4 border-blue-400 bg-blue-50/60 p-4 dark:bg-blue-950/30">
+      <p class="font-bold text-blue-800 dark:text-blue-300">2. R — Repent (Покаяние и Очищение) · 2–3 мин</p>
+      <p class="mt-2 text-sm text-brand-700 dark:text-brand-300"><strong>Цель:</strong> Очистить «окно совести», чтобы озарение Духа беспрепятственно проникало в сердце.</p>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Как применить:</strong> Попросите Святого Духа высветить, где вы допустили грех, раздражение, эгоизм или непрощение.</p>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Практика:</strong> Искренне исповедуйте конкретный проступок и верой примите очищение Кровью Христа (1 Ин. 1:9). Не застревайте в самоосуждении — покаяние возвращает радость спасения.</p>
+    </div>
+
+    <div class="rounded-lg border-l-4 border-green-400 bg-green-50/60 p-4 dark:bg-green-950/30">
+      <p class="font-bold text-green-800 dark:text-green-300">3. A — Ask (Прошение и Ходатайство) · 5–7 мин</p>
+      <p class="mt-2 text-sm text-brand-700 dark:text-brand-300"><strong>Цель:</strong> Принести нужды в Божье присутствие со смелостью и верой.</p>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Как применить:</strong> Разделите блок на две части:</p>
+      <ul class="mt-1 ml-5 list-disc space-y-1 text-sm text-brand-700 dark:text-brand-300">
+        <li><strong>За других:</strong> молитва за спасение близких, нужды церкви, сирот, страну.</li>
+        <li><strong>За себя:</strong> принесение личных и духовных нужд.</li>
+      </ul>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Практика:</strong> Избегайте туманных формулировок («Бог, благослови всех»). Молитесь конкретно, опираясь на обетования Писания (Мк. 10:51).</p>
+    </div>
+
+    <div class="rounded-lg border-l-4 border-purple-400 bg-purple-50/60 p-4 dark:bg-purple-950/30">
+      <p class="font-bold text-purple-800 dark:text-purple-300">4. Y — Yield (Подчинение и Покой воли) · 3–5 мин</p>
+      <p class="mt-2 text-sm text-brand-700 dark:text-brand-300"><strong>Цель:</strong> Снять с себя бремя контроля и подчинить свою волю воле Отца.</p>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Как применить:</strong> В конце молитвы не спешите сразу возвращаться к суете. Отдайте исход всех ваших прошений в руки Бога («Не моя воля, но Твоя да будет»).</p>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Практика:</strong> Посидите 2 минуты в созерцательном молчании. Используйте жест «Ладони вверх» — раскройте руки на коленях в знак полной готовности принять любой Божий ответ и покой.</p>
+    </div>
+
+  </div>
+
+  <div class="mt-6 rounded-lg border-l-4 border-accent-500 bg-accent-50 p-4 dark:bg-accent-950/40">
+    <p class="text-sm text-brand-800 dark:text-brand-200">
+      <strong>💡 Совет:</strong> Начните с 15 минут в день. Со временем эта структура станет естественной, и вы заметите, как меняется тон вашего общения с Отцом — от «списка просьб» к живому разговору.
+    </p>
+  </div>
+</template>
