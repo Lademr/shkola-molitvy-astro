@@ -180,7 +180,7 @@ author: "Плиев Владимир Бексултанович"
 </div>
 
 <!-- Хранилище интерактивных пояснений (скрыто, пока не кликнут) -->
-<div class="insight-content" data-insight-id="human-spirit">
+<template data-insight-id="human-spirit">
   <div class="mb-4 flex items-center gap-3">
     <span class="text-3xl">💡</span>
     <h3 class="font-serif text-2xl font-bold text-accent-700 dark:text-accent-300">Что такое «человеческий дух»?</h3>
@@ -196,9 +196,10 @@ author: "Плиев Владимир Бексултанович"
     <li><strong>Третий этаж, самый сокровенный — дух.</strong> Это место, где человек может напрямую соприкасаться с Богом. Туда не доходят ни логика, ни эмоции.</li>
   </ul>
 
-  <div class="mt-6 rounded-lg border-l-4 border-accent-500 bg-accent-50 p-4 dark:bg-accent-950/40">
+    <div class="mt-6 rounded-lg border-l-4 border-accent-500 bg-accent-50 p-4 dark:bg-accent-950/40">
     <p class="text-sm text-brand-800 dark:text-brand-200">
-      <strong>Почему это важно?</strong> Многие пытаются познать Бога «вторым этажом» — размышлениями или эмоциями. Но истинное богообщение происходит <strong>на третьем этаже — в духе</strong>. Именно об этом говорил Иисус: «Бог есть Дух, и поклоняющиеся Ему должны поклоняться в духе и истине» (Ин. 4:24).
+      <strong>Почему это важно?</strong> ...
     </p>
   </div>
+</template>
 </div>
