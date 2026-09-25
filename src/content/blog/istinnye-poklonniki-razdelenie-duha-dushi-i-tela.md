@@ -8,7 +8,11 @@ keywords: ["истинные поклонники", "поклонение в д�
 category: "учение"
 ---
 
-<div class="mb-8 rounded-lg border-l-4 border-accent-500 bg-accent-50 p-5 dark:bg-accent-950/30">
+<div class="mb-4 text-sm text-brand-600 dark:text-brand-400">
+⏱ ~8 минут чтения
+</div>
+
+<div class="mb-8 rounded-lg border-l-4 border-accent-500 bg-accent-50 p-5 dark:border-accent-400 dark:bg-accent-950/40">
 
 **Кратко о статье**
 
@@ -46,7 +50,7 @@ category: "учение"
 
 <div class="my-8 space-y-4">
 
-<div class="rounded-xl border border-red-200 bg-red-50/40 p-5 dark:border-red-800 dark:bg-red-950/20">
+<div class="rounded-xl border border-red-200 bg-red-50/40 p-5 dark:border-red-800 dark:bg-red-950/30">
 <div class="flex items-center gap-3 mb-3">
 <span class="text-3xl">🖐️</span>
 <h3 class="font-serif text-xl font-bold text-red-800 dark:text-red-300">Тело — Внешний двор</h3>
@@ -54,7 +58,7 @@ category: "учение"
 <p class="text-brand-700 dark:text-brand-300">Видимая часть, соприкасающаяся с материальным миром. Миросознание — контакт с физической реальностью через 5 органов чувств.</p>
 </div>
 
-<div class="rounded-xl border border-blue-200 bg-blue-50/40 p-5 dark:border-blue-800 dark:bg-blue-950/20">
+<div class="rounded-xl border border-blue-200 bg-blue-50/40 p-5 dark:border-blue-800 dark:bg-blue-950/30">
 <div class="flex items-center gap-3 mb-3">
 <span class="text-3xl">💭</span>
 <h3 class="font-serif text-xl font-bold text-blue-800 dark:text-blue-300">Душа — Святилище</h3>
@@ -62,7 +66,7 @@ category: "учение"
 <p class="text-brand-700 dark:text-brand-300">Место разума, чувств и воли; внутреннее «я» человека. Самосознание — центр личности и выражения собственного «я».</p>
 </div>
 
-<div class="rounded-xl border border-amber-200 bg-amber-50/40 p-5 dark:border-amber-800 dark:bg-amber-950/20">
+<div class="rounded-xl border border-amber-200 bg-amber-50/40 p-5 dark:border-amber-800 dark:bg-amber-950/30">
 <div class="flex items-center gap-3 mb-3">
 <span class="text-3xl">🕊️</span>
 <h3 class="font-serif text-xl font-bold text-amber-800 dark:text-amber-300">Дух — Святое Святых</h3>
@@ -78,22 +82,37 @@ category: "учение"
 
 Каждая из трёх частей человека наделена своим уникальным видом сознания:
 
-<div class="my-8 overflow-hidden rounded-xl border border-brand-200 dark:border-brand-800">
-
-| Часть | Сознание | Органы и функции | Назначение |
-|-------|----------|------------------|------------|
-| **Тело** | Миросознание | 5 органов чувств | Взаимодействие с физическим миром |
-| **Душа** | Самосознание | Разум, Чувства, Воля | Центр личности, «я» человека |
-| **Дух** | Богосознание | Совесть, Интуиция, Общение | Прямой контакт с Богом |
-
-</div>
-
-<div class="my-6 rounded-lg border-l-4 border-accent-500 bg-accent-50/60 p-5 dark:bg-accent-950/20">
-
-**🔑 Ключевой вывод**
-
-Бог есть Дух (Ин. 4:24). Ни тело, ни душа **не способны** напрямую соприкоснуться с Божьим Естеством. Общение с Творцом возможно **только в человеческом духе**.
-
+<div class="my-8 overflow-x-auto rounded-xl border border-brand-200 dark:border-brand-800">
+<table class="w-full text-sm">
+<thead>
+<tr class="bg-brand-100/60 dark:bg-brand-800/60">
+<th class="px-4 py-3 text-left font-semibold text-brand-900 dark:text-brand-100">Часть</th>
+<th class="px-4 py-3 text-left font-semibold text-brand-900 dark:text-brand-100">Сознание</th>
+<th class="px-4 py-3 text-left font-semibold text-brand-900 dark:text-brand-100">Органы и функции</th>
+<th class="px-4 py-3 text-left font-semibold text-brand-900 dark:text-brand-100">Назначение</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-brand-200 dark:divide-brand-800">
+<tr>
+<td class="px-4 py-3 font-semibold text-brand-900 dark:text-brand-100 whitespace-nowrap">Тело</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300 whitespace-nowrap">Миросознание</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300">5 органов чувств</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300">Взаимодействие с физическим миром</td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-semibold text-brand-900 dark:text-brand-100 whitespace-nowrap">Душа</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300 whitespace-nowrap">Самосознание</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300">Разум, Чувства, Воля</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300">Центр личности, «я» человека</td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-semibold text-brand-900 dark:text-brand-100 whitespace-nowrap">Дух</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300 whitespace-nowrap">Богосознание</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300">Совесть, Интуиция, Общение</td>
+<td class="px-4 py-3 text-brand-700 dark:text-brand-300">Прямой контакт с Богом</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 ---
@@ -104,17 +123,17 @@ category: "учение"
 
 <div class="my-8 grid gap-4 md:grid-cols-3">
 
-<div class="rounded-xl border border-rose-200 bg-rose-50/40 p-5 dark:border-rose-800 dark:bg-rose-950/20">
+<div class="rounded-xl border border-rose-200 bg-rose-50/40 p-5 dark:border-rose-800 dark:bg-rose-950/30">
 <h3 class="font-serif text-lg font-bold text-rose-800 dark:text-rose-300 mb-2">1. Совесть</h3>
 <p class="text-sm text-brand-700 dark:text-brand-300"><strong>Орган оценки.</strong> Независимый орган в духе, который выносит суждение о правильном и неправильном, осуждая грех и подтверждая Божью святость независимо от логических оправданий разума.</p>
 </div>
 
-<div class="rounded-xl border border-emerald-200 bg-emerald-50/40 p-5 dark:border-emerald-800 dark:bg-emerald-950/20">
+<div class="rounded-xl border border-emerald-200 bg-emerald-50/40 p-5 dark:border-emerald-800 dark:bg-emerald-950/30">
 <h3 class="font-serif text-lg font-bold text-emerald-800 dark:text-emerald-300 mb-2">2. Интуиция</h3>
 <p class="text-sm text-brand-700 dark:text-brand-300"><strong>Орган прямого знания.</strong> Способность духа непосредственно знать Божью волю и духовные реальности без участия анализа, доказательств или физических ощущений.</p>
 </div>
 
-<div class="rounded-xl border border-indigo-200 bg-indigo-50/40 p-5 dark:border-indigo-800 dark:bg-indigo-950/20">
+<div class="rounded-xl border border-indigo-200 bg-indigo-50/40 p-5 dark:border-indigo-800 dark:bg-indigo-950/30">
 <h3 class="font-serif text-lg font-bold text-indigo-800 dark:text-indigo-300 mb-2">3. Общение</h3>
 <p class="text-sm text-brand-700 dark:text-brand-300"><strong>Орган поклонения.</strong> Непосредственное единение с Личностью Бога, в котором верующий поклоняется Отцу и взывает: «Авва, Отче!» (Рим. 8:15).</p>
 </div>
@@ -129,7 +148,7 @@ category: "учение"
 
 <div class="my-8 grid gap-4 md:grid-cols-2">
 
-<div class="rounded-xl border border-red-200 bg-red-50/40 p-5 dark:border-red-800 dark:bg-red-950/20">
+<div class="rounded-xl border border-red-200 bg-red-50/40 p-5 dark:border-red-800 dark:bg-red-950/30">
 <h3 class="font-serif text-lg font-bold text-red-800 dark:text-red-300 mb-3">❌ Душевный поклонник</h3>
 <ul class="space-y-2 text-sm text-brand-700 dark:text-brand-300">
 <li>Ищет в молитве прежде всего приятных эмоций</li>
@@ -140,7 +159,7 @@ category: "учение"
 </ul>
 </div>
 
-<div class="rounded-xl border border-green-200 bg-green-50/40 p-5 dark:border-green-800 dark:bg-green-950/20">
+<div class="rounded-xl border border-green-200 bg-green-50/40 p-5 dark:border-green-800 dark:bg-green-950/30">
 <h3 class="font-serif text-lg font-bold text-green-800 dark:text-green-300 mb-3">✅ Духовный поклонник</h3>
 <ul class="space-y-2 text-sm text-brand-700 dark:text-brand-300">
 <li>Опирается на веру и тихую интуицию духа</li>
@@ -258,7 +277,7 @@ category: "учение"
 
 ---
 
-<div class="my-8 rounded-2xl border-2 border-accent-400 bg-gradient-to-br from-accent-100 to-amber-100 p-6 dark:from-accent-950/60 dark:to-amber-950/40">
+<div class="my-8 rounded-2xl border-2 border-accent-400 bg-gradient-to-br from-accent-100 to-amber-100 p-6 shadow-lg dark:border-accent-500 dark:from-accent-950/70 dark:to-amber-950/50">
 
 <h2 class="font-serif text-2xl font-bold text-accent-900 dark:text-accent-200 mb-3">📖 Хотите углубиться?</h2>
 
@@ -266,10 +285,12 @@ category: "учение"
 
 <p class="mt-3 text-brand-800 dark:text-brand-200">Этот урок — не просто чтение. Это <strong>путь к преображению вашей тайной комнаты</strong>. Пройдите его со всей серьёзностью — и вы увидите, как ваша молитвенная жизнь перейдёт на новый уровень.</p>
 
-<p class="mt-4 text-center">
-<a href="/lessons/2/istinnye-poklonniki" class="inline-block rounded-lg bg-accent-500 px-6 py-3 font-semibold text-white shadow-md transition-all hover:bg-accent-600 hover:shadow-lg">→ Перейти к Уроку 2</a>
+<p class="mt-6 text-center">
+<a href="/lessons/2/istinnye-poklonniki" class="inline-block rounded-lg bg-accent-500 px-8 py-3.5 font-semibold text-white shadow-md ring-2 ring-accent-300 transition-all hover:bg-accent-600 hover:shadow-lg hover:ring-accent-400 dark:bg-accent-500 dark:ring-accent-400 dark:hover:bg-accent-400 dark:hover:ring-accent-300">
+→ Перейти к Уроку 2
+</a>
 </p>
 
-<p class="mt-3 text-center text-sm italic text-brand-700 dark:text-brand-300">«Поклоняющиеся Ему должны поклоняться в духе и истине» (Ин. 4:24)</p>
+<p class="mt-4 text-center text-sm italic text-brand-700 dark:text-brand-300">«Поклоняющиеся Ему должны поклоняться в духе и истине» (Ин. 4:24)</p>
 
 </div>
