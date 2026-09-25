@@ -4,19 +4,71 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
-const lessons = (await getCollection('lessons')).sort((a, b) => a.slug.localeCompare(b.slug));
+// Загружаем и сортируем уроки по номеру
+const lessons = (await getCollection('lessons')).sort((a, b) => {
+  const aId = parseInt(a.slug.match(/^(\d+)/)?.[1] || '0');
+  const bId = parseInt(b.slug.match(/^(\d+)/)?.[1] || '0');
+  return aId - bId;
+});
 
 const parseSlug = (slug: string): { id: string; name: string } => {
   const match = slug.match(/^(\d+)-(.+)$/);
   return match ? { id: match[1], name: match[2] } : { id: slug, name: slug };
 };
 
+// Описание блоков — по 6 уроков
+const BLOCKS = [
+  {
+    num: 1,
+    title: 'Блок 1. Основы молитвенной жизни',
+    subtitle: 'Начальный уровень — с чего начать путь',
+    range: [1, 6],
+  },
+  {
+    num: 2,
+    title: 'Блок 2. Углубление',
+    subtitle: 'Средний уровень — понимание и практика',
+    range: [7, 12],
+  },
+  {
+    num: 3,
+    title: 'Блок 3. Зрелость',
+    subtitle: 'Продвинутый уровень — духовная зрелость',
+    range: [13, 18],
+  },
+  {
+    num: 4,
+    title: 'Блок 4. Служение',
+    subtitle: 'Ходатайство и служение другим',
+    range: [19, 24],
+  },
+  {
+    num: 5,
+    title: 'Блок 5. Плод',
+    subtitle: 'Плоды духовной жизни',
+    range: [25, 31],
+  },
+];
+
+// Группировка уроков по блокам
+const lessonsByBlock = BLOCKS.map((block) => ({
+  ...block,
+  lessons: lessons
+    .map((lesson) => {
+      const { id, name } = parseSlug(lesson.slug);
+      return { lesson, id, name, num: parseInt(id) };
+    })
+    .filter(({ num }) => num >= block.range[0] && num <= block.range[1]),
+})).filter((block) => block.lessons.length > 0);
+
+const totalLessons = lessons.length;
+
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'Уроки молитвенной жизни',
-    url: 'https://shkola-molity.ru/lessons',
+    url: 'https://shkola-molitvy.ru/lessons',
     inLanguage: 'ru',
   },
 ];
@@ -24,31 +76,118 @@ const jsonLd = [
 
 <BaseLayout
   title="Уроки молитвенной жизни — Школа Молитвы"
-  description="Интерактивные уроки молитвенной жизни: водительство Духом, интуиция духа, отцовство Бога."
-  canonical="https://shkola-molity.ru/lessons"
+  description="Последовательный курс молитвенной жизни: от основ до продвинутых практик. 31 урок, разбитый на 5 блоков."
+  canonical="https://shkola-molityv.ru/lessons"
   jsonLd={jsonLd}
 >
   <Header />
   <main class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-    <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">Уроки молитвенной жизни</h1>
-    <p class="mt-3 max-w-2xl text-brand-700 dark:text-brand-300">Последовательный курс: от основ слушания Бога до продвинутых практик.</p>
+    <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">
+      Уроки молитвенной жизни
+    </h1>
+    <p class="mt-3 max-w-2xl text-brand-700 dark:text-brand-300">
+      Последовательный курс: от основ слушания Бога до продвинутых практик.
+      Проходите уроки по порядку — каждый следующий опирается на предыдущий.
+    </p>
 
-    {lessons.length === 0 ? (
-      <p class="mt-12 rounded-lg border border-dashed border-brand-300 p-8 text-center dark:border-brand-700">Скоро появятся уроки</p>
-    ) : (
-      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {lessons.map((lesson) => {
-          const { id, name } = parseSlug(lesson.slug);
-          return (
-            <a href={`/lessons/${id}/${name}`} class="group flex flex-col rounded-xl border border-brand-200 bg-white/80 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-brand-800 dark:bg-brand-900/60">
-              <span class="inline-flex w-fit rounded-full bg-accent-100 px-3 py-1 text-xs font-medium text-accent-900 dark:bg-accent-900/60 dark:text-accent-100">{lesson.data.level}</span>
-              <h2 class="mt-3 font-serif text-xl font-semibold text-brand-950 group-hover:text-accent-700 dark:text-brand-50">{lesson.data.title}</h2>
-              <p class="mt-2 flex-1 text-sm leading-relaxed text-brand-700 dark:text-brand-300">{lesson.data.description}</p>
-              <p class="mt-4 text-xs text-brand-500 dark:text-brand-400">⏱ {lesson.data.duration} · ✍ {lesson.data.author}</p>
-            </a>
-          );
-        })}
+    {/* Призыв начать с первого урока */}
+    {lessons.length > 0 && (
+      <div class="mt-8 rounded-2xl border-2 border-accent-400 bg-gradient-to-r from-accent-100 to-amber-50 p-6 dark:from-accent-950/60 dark:to-amber-950/40">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="text-4xl">🚀</span>
+            <div>
+              <p class="font-serif text-lg font-bold text-accent-900 dark:text-accent-200">
+                Начните с первого урока
+              </p>
+              <p class="mt-1 text-sm text-brand-700 dark:text-brand-300">
+                Если вы здесь впервые — откройте Урок 1 и двигайтесь по порядку.
+              </p>
+            </div>
+          </div>
+          {(() => {
+            const first = lessons[0];
+            const { id, name } = parseSlug(first.slug);
+            return (
+              <a
+                href={`/lessons/${id}/${name}`}
+                class="rounded-lg bg-accent-500 px-6 py-3 font-bold text-white shadow-md ring-2 ring-accent-300 transition-all hover:bg-accent-600 dark:ring-accent-400"
+              >
+                Открыть Урок 1 →
+              </a>
+            );
+          })()}
+        </div>
       </div>
+    )}
+
+    {/* Блоки с уроками */}
+    {lessonsByBlock.map((block) => (
+      <section class="mt-12">
+        <div class="mb-6 border-b-2 border-brand-200 pb-3 dark:border-brand-800">
+          <h2 class="font-serif text-2xl font-bold text-brand-950 dark:text-brand-50">
+            {block.title}
+          </h2>
+          <p class="mt-1 text-sm text-brand-600 dark:text-brand-400">
+            {block.subtitle} · {block.lessons.length} {block.lessons.length === 1 ? 'урок' : block.lessons.length < 5 ? 'урока' : 'уроков'}
+          </p>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {block.lessons.map(({ lesson, id, name, num }) => {
+            const isFirst = num === 1;
+            return (
+              <a
+                href={`/lessons/${id}/${name}`}
+                class:list={[
+                  'group relative flex flex-col rounded-xl border bg-white/80 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-brand-900/60',
+                  isFirst
+                    ? 'border-accent-400 ring-2 ring-accent-200 dark:border-accent-500 dark:ring-accent-800'
+                    : 'border-brand-200 dark:border-brand-800',
+                ]}
+              >
+                {/* Номер урока + бейдж «Начните здесь» */}
+                <div class="mb-4 flex items-center justify-between">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-100 font-serif text-lg font-bold text-accent-800 dark:bg-accent-900/60 dark:text-accent-200">
+                    {num}
+                  </div>
+                  {isFirst && (
+                    <span class="rounded-full bg-accent-500 px-3 py-1 text-xs font-bold text-white">
+                      Начните здесь
+                    </span>
+                  )}
+                </div>
+
+                {/* Уровень */}
+                <span class="inline-flex w-fit rounded-full bg-brand-100 px-3 py-1 text-xs font-medium text-brand-800 dark:bg-brand-800 dark:text-brand-200">
+                  {lesson.data.level}
+                </span>
+
+                {/* Заголовок */}
+                <h3 class="mt-3 font-serif text-xl font-semibold text-brand-950 group-hover:text-accent-700 dark:text-brand-50 dark:group-hover:text-accent-300">
+                  {lesson.data.title}
+                </h3>
+
+                {/* Описание */}
+                <p class="mt-2 flex-1 text-sm leading-relaxed text-brand-700 dark:text-brand-300">
+                  {lesson.data.description}
+                </p>
+
+                {/* Мета */}
+                <p class="mt-4 text-xs text-brand-500 dark:text-brand-400">
+                  ⏱ {lesson.data.duration} · ✍ {lesson.data.author}
+                </p>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    {lessons.length === 0 && (
+      <p class="mt-12 rounded-lg border border-dashed border-brand-300 p-8 text-center dark:border-brand-700">
+        Скоро появятся уроки
+      </p>
     )}
   </main>
   <Footer />
