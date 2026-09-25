@@ -59,7 +59,7 @@ while ((match = insightRegex.exec(rawContent)) !== null) {
   let answer = content.replace(/<h[23][^>]*>[\s\S]*?<\/h[23]>/g, '');
 
   // Убираем emoji (не они нужны в тексте для поисковика)
-  answer = answer.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '');
+  answer = answer.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\uFE0E\uFE0F\u200D]/gu, '');
 
   // Заменяем блочные элементы на точку с пробелом
   answer = answer.replace(/<\/(p|li|h[1-6])>/g, '. ');
