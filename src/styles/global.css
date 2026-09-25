@@ -83,6 +83,18 @@ body {
 }
 
 /* ============================================
+   Единый стиль чекбоксов
+   ============================================ */
+
+.lesson-content input[type="checkbox"] {
+  @apply h-5 w-5 shrink-0 cursor-pointer accent-accent-500;
+}
+
+.lesson-content label:has(input[type="checkbox"]) {
+  @apply cursor-pointer;
+}
+
+/* ============================================
    Интерактивные пояснения (всплывающие плашки)
    ============================================ */
 
@@ -103,7 +115,6 @@ body {
   @apply border-accent-700 text-accent-900 dark:border-accent-200 dark:text-accent-100;
 }
 
-/* Модальное окно — скрыто, пока не открыто */
 .insight-modal:not(.hidden) {
   display: flex;
   position: fixed;
@@ -132,18 +143,6 @@ body {
 }
 
 /* Хранилище пояснений — надёжно скрыто */
-template[data-insight-id] {
+script[type="text/html"][data-insight-id] {
   display: none;
-}
-
-/* ============================================
-   Единый стиль чекбоксов в заданиях
-   ============================================ */
-
-.lesson-content input[type="checkbox"] {
-  @apply h-5 w-5 shrink-0 cursor-pointer accent-accent-500;
-}
-
-.lesson-content label:has(input[type="checkbox"]) {
-  @apply cursor-pointer;
 }
