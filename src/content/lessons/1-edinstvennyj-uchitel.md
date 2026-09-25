@@ -142,7 +142,7 @@ author: "Плиев Владимир Бексултанович"
 
 <label class="my-2 flex items-center gap-3 cursor-pointer">
 <input type="checkbox" class="h-5 w-5 accent-accent-500">
-<span class="text-brand-800 dark:text-brand-200">Молитвенно погружаюсь в текст 1 Кор. 2:12</span>
+<span class="text-brand-800 dark:text-brand-200">Молитвенно погружаюсь в текст <span class="insight-term" data-insight="pray-reading">1 Кор. 2:12</span></span>
 </label>
 
 <label class="my-2 flex items-center gap-3 cursor-pointer">
@@ -179,56 +179,47 @@ author: "Плиев Владимир Бексултанович"
 
 </div>
 
-<!-- Хранилище интерактивных пояснений (скрыто, пока не кликнут) -->
-<template data-insight-id="human-spirit">
+<script type="text/html" data-insight-id="human-spirit">
   <div class="mb-4 flex items-center gap-3">
     <span class="text-3xl">💡</span>
     <h3 class="font-serif text-2xl font-bold text-accent-700 dark:text-accent-300">Что такое «человеческий дух»?</h3>
   </div>
-
   <p class="mb-4 text-brand-800 dark:text-brand-200">
     Представьте, что человек — это <strong>трёхэтажный дом</strong>:
   </p>
-
   <ul class="mb-4 space-y-3 text-brand-700 dark:text-brand-300">
     <li><strong>Первый этаж — тело.</strong> Через него мы общаемся с материальным миром: видим, слышим, осязаем.</li>
     <li><strong>Второй этаж — душа.</strong> Это наши мысли, эмоции и воля. Здесь рождаются рассуждения, чувства, решения.</li>
     <li><strong>Третий этаж, самый сокровенный — дух.</strong> Это место, где человек может напрямую соприкасаться с Богом. Туда не доходят ни логика, ни эмоции.</li>
   </ul>
-
   <div class="mt-6 rounded-lg border-l-4 border-accent-500 bg-accent-50 p-4 dark:bg-accent-950/40">
     <p class="text-sm text-brand-800 dark:text-brand-200">
       <strong>Почему это важно?</strong> Многие пытаются познать Бога «вторым этажом» — размышлениями или эмоциями. Но истинное богообщение происходит <strong>на третьем этаже — в духе</strong>. Именно об этом говорил Иисус: «Бог есть Дух, и поклоняющиеся Ему должны поклоняться в духе и истине» (Ин. 4:24).
     </p>
   </div>
-</template>
+</script>
 
-<template data-insight-id="pray-method">
+<script type="text/html" data-insight-id="pray-method">
   <div class="mb-4 flex items-center gap-3">
     <span class="text-3xl">🙏</span>
     <h3 class="font-serif text-2xl font-bold text-accent-700 dark:text-accent-300">Модель P-R-A-Y</h3>
   </div>
-
   <p class="mb-4 text-brand-800 dark:text-brand-200">
     <strong>P-R-A-Y</strong> — простая, но глубокая четырёхшаговая структура, которая помогает сбалансировать молитву и переключить фокус с суеты на присутствие Бога. Расчёт на <strong>15–20 минут</strong> ежедневной тайной комнаты.
   </p>
-
   <div class="space-y-4 mt-6">
-
     <div class="rounded-lg border-l-4 border-amber-400 bg-amber-50/60 p-4 dark:bg-amber-950/30">
       <p class="font-bold text-amber-800 dark:text-amber-300">1. P — Praise (Хвала и Поклонение) · 3–5 мин</p>
       <p class="mt-2 text-sm text-brand-700 dark:text-brand-300"><strong>Цель:</strong> Настроить дух, взглянуть на Величие и Характер Отца, а не на свои проблемы.</p>
       <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Как применить:</strong> Начните молитву не с просьб, а с прославления Бога за то, Кто Он есть (Его любовь, святость, верность, всемогущество), и благодарности за конкретные дела.</p>
       <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Практика:</strong> Произнесите вслух 2–3 качества Бога или помолитесь словами Псалма (например, Пс. 102 или Пс. 144).</p>
     </div>
-
     <div class="rounded-lg border-l-4 border-blue-400 bg-blue-50/60 p-4 dark:bg-blue-950/30">
       <p class="font-bold text-blue-800 dark:text-blue-300">2. R — Repent (Покаяние и Очищение) · 2–3 мин</p>
       <p class="mt-2 text-sm text-brand-700 dark:text-brand-300"><strong>Цель:</strong> Очистить «окно совести», чтобы озарение Духа беспрепятственно проникало в сердце.</p>
       <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Как применить:</strong> Попросите Святого Духа высветить, где вы допустили грех, раздражение, эгоизм или непрощение.</p>
       <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Практика:</strong> Искренне исповедуйте конкретный проступок и верой примите очищение Кровью Христа (1 Ин. 1:9). Не застревайте в самоосуждении — покаяние возвращает радость спасения.</p>
     </div>
-
     <div class="rounded-lg border-l-4 border-green-400 bg-green-50/60 p-4 dark:bg-green-950/30">
       <p class="font-bold text-green-800 dark:text-green-300">3. A — Ask (Прошение и Ходатайство) · 5–7 мин</p>
       <p class="mt-2 text-sm text-brand-700 dark:text-brand-300"><strong>Цель:</strong> Принести нужды в Божье присутствие со смелостью и верой.</p>
@@ -239,19 +230,60 @@ author: "Плиев Владимир Бексултанович"
       </ul>
       <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Практика:</strong> Избегайте туманных формулировок («Бог, благослови всех»). Молитесь конкретно, опираясь на обетования Писания (Мк. 10:51).</p>
     </div>
-
     <div class="rounded-lg border-l-4 border-purple-400 bg-purple-50/60 p-4 dark:bg-purple-950/30">
       <p class="font-bold text-purple-800 dark:text-purple-300">4. Y — Yield (Подчинение и Покой воли) · 3–5 мин</p>
       <p class="mt-2 text-sm text-brand-700 dark:text-brand-300"><strong>Цель:</strong> Снять с себя бремя контроля и подчинить свою волю воле Отца.</p>
       <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Как применить:</strong> В конце молитвы не спешите сразу возвращаться к суете. Отдайте исход всех ваших прошений в руки Бога («Не моя воля, но Твоя да будет»).</p>
       <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Практика:</strong> Посидите 2 минуты в созерцательном молчании. Используйте жест «Ладони вверх» — раскройте руки на коленях в знак полной готовности принять любой Божий ответ и покой.</p>
     </div>
-
   </div>
-
   <div class="mt-6 rounded-lg border-l-4 border-accent-500 bg-accent-50 p-4 dark:bg-accent-950/40">
     <p class="text-sm text-brand-800 dark:text-brand-200">
       <strong>💡 Совет:</strong> Начните с 15 минут в день. Со временем эта структура станет естественной, и вы заметите, как меняется тон вашего общения с Отцом — от «списка просьб» к живому разговору.
     </p>
   </div>
-</template>
+</script>
+
+<script type="text/html" data-insight-id="pray-reading">
+  <div class="mb-4 flex items-center gap-3">
+    <span class="text-3xl">📖</span>
+    <h3 class="font-serif text-2xl font-bold text-accent-700 dark:text-accent-300">Как молитвенно погружаться в текст?</h3>
+  </div>
+  <p class="mb-4 text-brand-800 dark:text-brand-200">
+    <strong>Молитвочтение (Pray-Reading)</strong> — значит не пытаться проанализировать Библию интеллектом, а «вдыхать» Слово и молиться прямо теми фразами, которые вы видите на странице, превращая их в живой разговор с Богом.
+  </p>
+  <p class="mb-4 text-brand-700 dark:text-brand-300">
+    Вот простой 4-шаговый алгоритм для начинающих:
+  </p>
+  <div class="space-y-4 mt-6">
+    <div class="rounded-lg border-l-4 border-amber-400 bg-amber-50/60 p-4 dark:bg-amber-950/30">
+      <p class="font-bold text-amber-800 dark:text-amber-300">Шаг 1. Возьмите короткий отрывок (1–2 стиха)</p>
+      <p class="mt-2 text-sm text-brand-700 dark:text-brand-300">Не пытайтесь прочитать целую главу. Для молитвенного погружения достаточно одного короткого и сильного обещания.</p>
+      <p class="mt-1 text-sm text-brand-700 dark:text-brand-300"><strong>Пример:</strong> «Господь — Пастырь мой; я ни в чём не буду нуждаться» (Пс. 22:1).</p>
+    </div>
+    <div class="rounded-lg border-l-4 border-blue-400 bg-blue-50/60 p-4 dark:bg-blue-950/30">
+      <p class="font-bold text-blue-800 dark:text-blue-300">Шаг 2. Закройте разум, а не глаза</p>
+      <p class="mt-2 text-sm text-brand-700 dark:text-brand-300">Обычно на молитве мы закрываем глаза, но при молитвочтении <strong>смотрите прямо в текст Библии</strong>. Закрыть нужно критический разум — отложите попытки проводить богословский анализ, размышлять о грамматике или искать сложные истолкования.</p>
+    </div>
+    <div class="rounded-lg border-l-4 border-green-400 bg-green-50/60 p-4 dark:bg-green-950/30">
+      <p class="font-bold text-green-800 dark:text-green-300">Шаг 3. Примените правило 4-х слов («Б-К-И-С»)</p>
+      <p class="mt-2 text-sm text-brand-700 dark:text-brand-300">Молитесь по тексту, руководствуясь четырьмя принципами:</p>
+      <ul class="mt-2 ml-5 list-disc space-y-1 text-sm text-brand-700 dark:text-brand-300">
+        <li><strong>Быстро:</strong> повторяйте слова сразу, как видите, не давая уму времени на сомнения.</li>
+        <li><strong>Кратко:</strong> молитесь короткими репликами по 1–3 слова из стиха.</li>
+        <li><strong>Истинно:</strong> говорите искренне и без религиозного пафоса.</li>
+        <li><strong>Свежо:</strong> вплетайте слова стиха в прославление и благодарность.</li>
+      </ul>
+    </div>
+    <div class="rounded-lg border-l-4 border-purple-400 bg-purple-50/60 p-4 dark:bg-purple-950/30">
+      <p class="font-bold text-purple-800 dark:text-purple-300">Шаг 4. Как это выглядит на практике</p>
+      <p class="mt-2 text-sm text-brand-700 dark:text-brand-300">Вы смотрите на стих: <em>«Господь — Пастырь мой...»</em></p>
+      <p class="mt-1 text-sm italic text-brand-700 dark:text-brand-300">«Господь! Аминь! Ты — Пастырь мой! Слава Тебе, Господь! Ты мой Пастырь, веди меня сегодня! Аллилуйя! Я ни в чём не буду нуждаться! Аминь! В Тебе моё восполнение, Господь! Пастырь мой, я верю Тебе!»</p>
+    </div>
+  </div>
+  <div class="mt-6 rounded-lg border-l-4 border-accent-500 bg-accent-50 p-4 dark:bg-accent-950/40">
+    <p class="text-sm text-brand-800 dark:text-brand-200">
+      <strong>Почему это наполняет духовно?</strong> Библия — это не просто книга знаний, а <strong>«Дух и Жизнь»</strong> (Ин. 6:63). Молясь словами Писания, вы «питаете» свой дух так же, как тело питается ежедневной пищей.
+    </p>
+  </div>
+</script>
