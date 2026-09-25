@@ -137,7 +137,7 @@ author: "Плиев Владимир Бексултанович"
 
 <label class="my-2 flex items-center gap-3 cursor-pointer">
 <input type="checkbox" class="h-5 w-5 accent-accent-500">
-<span class="text-brand-800 dark:text-brand-200">Использую структуру P-R-A-Y: Praise → Repent → Ask → Yield</span>
+<span class="text-brand-800 dark:text-brand-200">Использую структуру <span class="insight-term" data-insight="pray-method">P-R-A-Y: Praise → Repent → Ask → Yield</span></span>
 </label>
 
 <label class="my-2 flex items-center gap-3 cursor-pointer">
