@@ -20,7 +20,7 @@ author: "Плиев Владимир Бексултанович"
 
 </div>
 
-## 📖 Полные тексты Писания
+## 📖 Тексты Писания
 
 <div class="my-6 rounded-xl border border-brand-200 bg-white/60 p-5 dark:border-brand-800 dark:bg-brand-900/40">
 
