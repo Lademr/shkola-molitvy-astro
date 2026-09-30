@@ -159,3 +159,18 @@ body {
 script[type="text/html"][data-insight-id] {
   display: none;
 }
+
+/* ============================================
+   Кнопки-призывы к действию (CTA)
+   Единый стиль для всех CTA в уроках, блоге и на страницах
+   ============================================ */
+
+a[class*="bg-accent-500"],
+button[class*="bg-accent-500"] {
+  @apply font-bold !text-white;
+}
+
+a[class*="bg-accent-500"]:hover,
+button[class*="bg-accent-500"]:hover {
+  @apply !text-white;
+}  
