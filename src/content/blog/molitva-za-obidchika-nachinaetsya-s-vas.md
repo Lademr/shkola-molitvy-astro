@@ -387,7 +387,7 @@ category: "практика"
 <p class="mt-3 text-brand-800 dark:text-brand-200">В уроках курса вы найдёте полный разбор практики «Ладони вниз / Ладони вверх», алгоритм перехода от обиды к состраданию Духа, разбор притчи о полночном друге и практические задания для тайной комнаты.</p>
 
 <p class="mt-6 text-center">
-<a href="/course/" class="inline-block rounded-lg bg-accent-500 px-8 py-3.5 font-semibold text-white shadow-md ring-2 ring-accent-300 transition-all hover:bg-accent-600 hover:shadow-lg hover:ring-accent-400 dark:bg-accent-500 dark:ring-accent-400 dark:hover:bg-accent-400 dark:hover:ring-accent-300">
+<a href="/lessons/" class="inline-block rounded-lg bg-accent-500 px-8 py-3.5 font-semibold text-white shadow-md ring-2 ring-accent-300 transition-all hover:bg-accent-600 hover:shadow-lg hover:ring-accent-400 dark:bg-accent-500 dark:ring-accent-400 dark:hover:bg-accent-400 dark:hover:ring-accent-300">
 → Начать изучение «Школы молитвы»
 </a>
 </p>
