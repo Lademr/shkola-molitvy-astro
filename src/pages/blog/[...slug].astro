@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ModalLink from '../../components/ModalLink.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -50,7 +51,7 @@ const jsonLd = [
     <article class="lesson-content">
       <h1 class="font-serif text-3xl font-bold text-brand-950 sm:text-4xl dark:text-brand-50">{post.data.title}</h1>
       <p class="text-sm text-brand-600 dark:text-brand-400">{post.data.author} · {post.data.datePublished}</p>
-      <Content />
+      <Content components={{ ModalLink }} />
     </article>
   </main>
   <Footer />
