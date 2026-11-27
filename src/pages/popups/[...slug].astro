@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import { render } from 'astro:content';
 
 export async function getStaticPaths() {
   const popups = await getCollection('popups');
@@ -11,7 +10,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content } = await entry.render(); // <-- Вот так правильно в Astro 4!
 ---
 
 <html>
