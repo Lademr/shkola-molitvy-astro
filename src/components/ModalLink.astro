@@ -1,0 +1,75 @@
+---
+// ModalLink.astro
+const { slug, text } = Astro.props;
+const url = `/popups/${slug}/`;
+---
+
+<span class="modal-trigger" data-url={url}>{text}</span>
+
+<dialog id="my-modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="this.closest('dialog').close()">×</button>
+    <div id="modal-body">Загрузка...</div>
+  </div>
+</dialog>
+
+<script>
+  document.querySelectorAll('.modal-trigger').forEach(trigger => {
+    trigger.addEventListener('click', async () => {
+      const dialog = document.getElementById('my-modal');
+      const body = document.getElementById('modal-body');
+      const url = trigger.getAttribute('data-url');
+
+      // Показываем окно сразу
+      dialog.showModal();
+      
+      try {
+        const response = await fetch(url);
+        const html = await response.text();
+        
+        // Вытаскиваем только содержимое <main> из загруженной страницы
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const articleContent = doc.querySelector('main') || doc.body;
+        
+        body.innerHTML = articleContent.innerHTML;
+      } catch (e) {
+        body.innerHTML = '<p>Ошибка загрузки статьи.</p>';
+      }
+    });
+  });
+</script>
+
+<style>
+  .modal-trigger {
+    color: #3b82f6;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .modal {
+    border: none;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    padding: 0;
+  }
+  .modal::backdrop {
+    background: rgba(0,0,0,0.5);
+  }
+  .modal-content {
+    padding: 2rem;
+    position: relative;
+    background-color: white; /* Если у вас темная тема, поменяйте на #1a1a1a */
+    color: black;            /* И цвет текста соответственно */
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: inherit;
+  }
+</style>
