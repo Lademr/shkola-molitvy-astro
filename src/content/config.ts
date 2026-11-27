@@ -26,4 +26,11 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { lessons, blog };
+const popups = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
+export const collections = { lessons, blog, popups };
